@@ -1,19 +1,61 @@
-let input = document.querySelector(`#input`);
-let button = document.querySelector(`#button`);
+let doButton = document.querySelector(`#do`);
+let eatButton = document.querySelector(`#eat`);
+let seeButton = document.querySelector(`#see`);
+let learnButton = document.querySelector(`#learn`);
+let askButton = document.querySelector(`#ask`);
 
-let baseURL = `http://127.0.0.1:5500/public/index.html`
-let destinationsURL = `https://atlas-obscura-api.herokuapp.com/api/atlas/destinations`
+let dogButton = document.querySelector(`#dog`);
 
 
-const getDestinations = () => {
-    axios.get(`${destinationsURL}`)
-        .then((res) => {
-            console.log(res.data)
-            // console.log(input.value)
-        })
-        .catch((err) => {
-            console.error(err);
-        })
-}
+doButton.addEventListener('click', async () => {
+    await axios.get(`http://localhost:5005/do/`)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch(err => console.log(err))
+});
 
-button.addEventListener('click', getDestinations)
+
+eatButton.addEventListener('click', async () => {
+    await axios.get(`http://localhost:5005/eat/`)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch(err => console.log(err))
+});
+
+
+seeButton.addEventListener('click', async () => {
+    await axios.get(`http://localhost:5005/see/`)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch(err => console.log(err))
+});
+
+
+learnButton.addEventListener('click', async () => {
+    await axios.get(`http://localhost:5005/learn/`)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch(err => console.log(err))
+});
+
+
+askButton.addEventListener('click', async () => {
+    await axios.get(`http://localhost:5005/ask/`)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch(err => console.log(err))
+});
+
+
+dogButton.addEventListener('click', async () => {
+    await axios.get(`http://localhost:5005/dog/`)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch(err => console.log(err))
+});
