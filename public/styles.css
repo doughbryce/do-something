@@ -1,0 +1,10 @@
+button {
+  background-color: aquamarine;
+  height: 100px;
+  width: 120px;
+}
+
+button:hover {
+  background-color: aqua;
+}
+/*# sourceMappingURL=styles.css.map */

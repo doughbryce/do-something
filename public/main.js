@@ -3,7 +3,6 @@ let eatButton = document.querySelector(`#eat`);
 let seeButton = document.querySelector(`#see`);
 let learnButton = document.querySelector(`#learn`);
 let askButton = document.querySelector(`#ask`);
-
 let dogButton = document.querySelector(`#dog`);
 
 
