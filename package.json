@@ -12,13 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "browserify": "^17.0.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "nodemon": "^2.0.16",
-    "pg": "^8.7.3",
-    "pg-hstore": "^2.3.4",
-    "require": "^2.4.20",
-    "rollbar": "^2.25.0"
+    "require": "^2.4.20"
   }
 }

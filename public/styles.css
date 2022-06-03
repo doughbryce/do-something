@@ -32,17 +32,9 @@ button:hover {
   font-size: medium;
 }
 
-.card {
-  background-color: lightblue;
-}
-
 .text {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: x-large;
-}
-
-img {
-  width: 300 px;
 }
 
 .answer {

@@ -11,7 +11,7 @@ app.use(express.json());
 
 const PORT = 5010;
 
-// DO SOMETHING
+// DO 
 let boredAPI = `https://www.boredapi.com/api/activity/`;
 let activity = {
     text: ``,
@@ -34,7 +34,7 @@ app.get(`/do`, (req, res) => {
         res.status(200).send(activity);
 });
 
-// EAT SOMETHING
+// EAT 
 let eatAPI = `https://foodish-api.herokuapp.com/api/`;
 let eatURL = {url: ``};
 
@@ -74,7 +74,7 @@ app.get(`/see`, async (req, res) => {
     await res.status(200).send(gifURL)
 })
 
-// LEARN SOMETHING
+// ADVICE 
 let adviceAPI = `https://api.adviceslip.com/advice`
 let advice = {text: ``};
 
@@ -94,7 +94,7 @@ app.get(`/learn`, (req, res) => {
     res.status(200).send(advice)
 })
 
-// ASK SOMETHING
+// JEOPARDY 
 let triviaAPI = `https://jservice.io/api/random`
 let trivia = {
     title: ``,
