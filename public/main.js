@@ -15,29 +15,20 @@ const addCard = async (src) => {
     
     if (typeof src.url !== `undefined`) {
         const temp = document.createElement('div')
-        temp.innerHTML = await `<p class="text">${src.url}</p>`
-        // temp.innerHTML = `<iframe src="${src.url}" width="700px" frameborder="0"></iframe>`
+        temp.innerHTML = await `<img width="350" height="350" src="${src.url}" alt="">`
         card.insertAdjacentElement(`afterbegin`, temp)
     }
-    if (typeof src.answer !== `undefined`) {
+    if (typeof src.gif !== `undefined`) {
         const temp = document.createElement('div')
-        temp.innerHTML = await `<p class="text">answer (hover to show ↓):</p>
+        temp.innerHTML = await `<iframe src="${src.gif}" width="500" height="500" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`
+        card.insertAdjacentElement(`afterbegin`, temp)
+    }
+    if (typeof src.title !== `undefined` && typeof src.question !== `undefined` && typeof src.answer !== `undefined`) {
+        const temp = document.createElement('div')
+        temp.innerHTML = await `<p class="text">${src.title.toUpperCase()}</p>
+        <p class="text">${src.question}</p>
+        <p class="text">Answer (hover to show ↓):</p>
         <p class="text answer">${src.answer}</p>`
-        card.insertAdjacentElement(`afterbegin`, temp)
-    }
-    if (typeof src.question !== `undefined`) {
-        const temp = document.createElement('div')
-        temp.innerHTML = await `<p class="text">question: ${src.question}</p>`
-        card.insertAdjacentElement(`afterbegin`, temp)
-    }
-    if (typeof src.title !== `undefined`) {
-        const temp = document.createElement('div')
-        temp.innerHTML = await `<p class="text">title: ${src.title}</p>`
-        card.insertAdjacentElement(`afterbegin`, temp)
-    }
-    if (typeof src.price !== `undefined`) {
-        const temp = document.createElement('div')
-        temp.innerHTML = await `<p class="text">Price (1-10): ${src.price}</p>`
         card.insertAdjacentElement(`afterbegin`, temp)
     }
     if (typeof src.text !== `undefined`) {

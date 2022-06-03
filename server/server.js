@@ -15,13 +15,11 @@ const PORT = 5010;
 let boredAPI = `https://www.boredapi.com/api/activity/`;
 let activity = {
     text: ``,
-    price: 0,
 };
 
 axios.get(boredAPI, { httpsAgent: agent })
     .then(async (res) => {
         activity.text = await res.data.activity;
-        activity.price = await res.data.price * 10;
     })
     .catch((err) => console.log(err));
 
@@ -30,7 +28,6 @@ app.get(`/do`, (req, res) => {
         axios.get(boredAPI, { httpsAgent: agent })
         .then(async (res) => {
             activity.text = await res.data.activity;
-            activity.price = await res.data.price * 10;
         })
         .catch((err) => console.log(err));
     
@@ -58,19 +55,19 @@ app.get(`/eat`, (req, res) => {
 })
 
 // GIF
-let gifAPI = `https://api.giphy.com/v1/gifs/random?api_key=kHX6KWFVTA4CpWm45qGS08UezlRaAOrw&limit=1&tag=funny+kid`
-let gifURL = {url: ``};
+let gifAPI = `https://api.giphy.com/v1/gifs/random?api_key=kHX6KWFVTA4CpWm45qGS08UezlRaAOrw&limit=1&tag=funny+animal`
+let gifURL = {gif: ``};
 
 axios.get(gifAPI, { httpsAgent: agent })
     .then(async (res) => {
-        gifURL.url = res.data.data.embed_url;
+        gifURL.gif = res.data.data.embed_url;
     })
     .catch((err) => console.log(err))
 
 app.get(`/see`, async (req, res) => {
     axios.get(gifAPI, { httpsAgent: agent })
     .then(async (res) => {
-        gifURL.url = res.data.data.embed_url;
+        gifURL.gif = res.data.data.embed_url;
     })
     .catch((err) => console.log(err))
     
