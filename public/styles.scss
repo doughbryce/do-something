@@ -6,3 +6,21 @@ button {
         background-color: aqua;
     }
 }
+
+.card {
+    background-color: lightblue;
+}
+
+.text {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+img {
+    width: 300 px;
+}
+.answer {
+    color: white;
+    &:hover {
+        color: black;
+    }
+}

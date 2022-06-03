@@ -6,20 +6,22 @@ const https = require('https');
 
 const agent = new https.Agent({rejectUnauthorized: false});
 app.use(cors({origin: '*'}))
+app.use(cors());
 app.use(express.json());
 
-const PORT = 5005;
+const PORT = 5010;
 
 // DO SOMETHING
 let boredAPI = `https://www.boredapi.com/api/activity/`;
-let activity = {};
+let activity = {
+    text: ``,
+    price: 0,
+};
 
 axios.get(boredAPI, { httpsAgent: agent })
     .then(async (res) => {
-        activity = {
-            "activity": await res.data.activity,
-            "price(1-10)": await (res.data.price) * 10
-        }
+        activity.text = await res.data.activity;
+        activity.price = await res.data.price * 10;
     })
     .catch((err) => console.log(err));
 
@@ -27,10 +29,8 @@ app.get(`/do`, (req, res) => {
 
         axios.get(boredAPI, { httpsAgent: agent })
         .then(async (res) => {
-            activity = {
-                "activity": await res.data.activity,
-                "price(1-10)": await (res.data.price) * 10
-            }
+            activity.text = await res.data.activity;
+            activity.price = await res.data.price * 10;
         })
         .catch((err) => console.log(err));
     
@@ -39,58 +39,58 @@ app.get(`/do`, (req, res) => {
 
 // EAT SOMETHING
 let eatAPI = `https://foodish-api.herokuapp.com/api/`;
-let eatURL = ``;
+let eatURL = {url: ``};
 
 axios.get(eatAPI, { httpsAgent: agent })
     .then(async (res) => {
-        eatURL = await res.data.image
+        eatURL.url = await res.data.image;
     })
     .catch((err) => console.log(err))
 
 app.get(`/eat`, (req, res) => {
     axios.get(eatAPI, { httpsAgent: agent })
         .then(async (res) => {
-            eatURL = await res.data.image
+            eatURL.url = await res.data.image
         })
         .catch((err) => console.log(err))
 
     res.status(200).send(eatURL)
 })
 
-// SEE SOMETHING
+// GIF
 let gifAPI = `https://api.giphy.com/v1/gifs/random?api_key=kHX6KWFVTA4CpWm45qGS08UezlRaAOrw&limit=1&tag=funny+kid`
-let gifURL = ``;
+let gifURL = {url: ``};
 
 axios.get(gifAPI, { httpsAgent: agent })
     .then(async (res) => {
-        gifURL = res.data.data.images.original.mp4;
+        gifURL.url = res.data.data.embed_url;
     })
     .catch((err) => console.log(err))
 
-app.get(`/see`, (req, res) => {
+app.get(`/see`, async (req, res) => {
     axios.get(gifAPI, { httpsAgent: agent })
-        .then(async (res) => {
-            gifURL = res.data.data.images.original.mp4;
-        })
-        .catch((err) => console.log(err))
-
-    res.status(200).send(gifURL)
+    .then(async (res) => {
+        gifURL.url = res.data.data.embed_url;
+    })
+    .catch((err) => console.log(err))
+    
+    await res.status(200).send(gifURL)
 })
 
 // LEARN SOMETHING
 let adviceAPI = `https://api.adviceslip.com/advice`
-let advice = ``;
+let advice = {text: ``};
 
 axios.get(adviceAPI, { httpsAgent: agent })
     .then(async (res) => {
-        advice = res.data.slip.advice;
+        advice.text = res.data.slip.advice;
     })
     .catch((err) => console.log(err))
 
 app.get(`/learn`, (req, res) => {
     axios.get(adviceAPI, { httpsAgent: agent })
         .then(async (res) => {
-            advice = res.data.slip.advice;
+            advice.text = res.data.slip.advice;
         })
         .catch((err) => console.log(err))
 
@@ -99,26 +99,26 @@ app.get(`/learn`, (req, res) => {
 
 // ASK SOMETHING
 let triviaAPI = `https://jservice.io/api/random`
-let trivia = {};
+let trivia = {
+    title: ``,
+    question: ``,
+    answer: ``
+};
 
 axios.get(triviaAPI, { httpsAgent: agent })
     .then(async (res) => {
-        trivia = {
-            title: res.data[0].category.title,
-            question: res.data[0].question,
-            answer: res.data[0].answer
-        }
+        trivia.title = res.data[0].category.title;
+        trivia.question = res.data[0].question;
+        trivia.answer = res.data[0].answer;
     })
     .catch((err) => console.log(err))
 
 app.get(`/ask`, (req, res) => {
     axios.get(triviaAPI, { httpsAgent: agent })
         .then(async (res) => {
-            trivia = {
-                title: res.data[0].category.title,
-                question: res.data[0].question,
-                answer: res.data[0].answer
-            }
+            trivia.title = res.data[0].category.title;
+            trivia.question = res.data[0].question;
+            trivia.answer = res.data[0].answer;
         })
         .catch((err) => console.log(err))
 
@@ -130,7 +130,7 @@ let dogFactAPI = `https://dog-api.kinduff.com/api/facts`;
 let dogPicAPI = `https://random.dog/woof.json?ref=publicapis.dev`;
 let dog = {
     fact: ``,
-    picture: ``
+    url: ``
 };
 
 axios.get(dogFactAPI, { httpsAgent: agent })
@@ -141,7 +141,7 @@ axios.get(dogFactAPI, { httpsAgent: agent })
 
 axios.get(dogPicAPI, { httpsAgent: agent })
     .then(async (res) => {
-        dog.picture = await res.data.url
+        dog.url = await res.data.url
     })
     .catch((err) => console.log(err))
 
@@ -154,7 +154,7 @@ app.get(`/dog`, (req, res) => {
 
     axios.get(dogPicAPI, { httpsAgent: agent })
         .then(async (res) => {
-            dog.picture = await res.data.url
+            dog.url = await res.data.url
         })
         .catch((err) => console.log(err))
 
